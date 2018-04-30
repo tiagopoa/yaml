@@ -15,7 +15,6 @@ def pipeline_executor(data):
         passos[x]=data['steps'][0]['execute'][x]
         x+=1
 
-    print("tasks j: ",data.get('tasks')[0])
     #Procura as instruções e as executa na ordem correta.
     for i in range(0,x):
         for j in range(0,x):
@@ -26,12 +25,12 @@ def pipeline_executor(data):
                 print("Iniciando execução do comando",cmd,"aguarde...")
                 print()            
                 try:
-                    output = subprocess.check_output(cmd, shell=False)                
+                    subprocess.check_output(cmd, shell=False)                
                 except subprocess.CalledProcessError as e:
                     print()
                     print ("Erro:",e.output)
                 print()
-                print("Processo",cmd,"finalizado.")
+                print("Execução do comando",cmd,"finalizado.")
                 print()
 
 if __name__ == "__main__":
