@@ -4,7 +4,6 @@ import time
 
 hoje = "%s" % (time.strftime("%Y%m%d"))
 
-
 def yaml_loader(filepath):
     """Loads a yaml file"""
     with open(filepath, "r") as file_descriptor:
@@ -32,7 +31,7 @@ def pipeline_executor(data):
                 arquivo.write("[%s]Iniciando execução do comando [%s] aguarde...\r\n" % (hora,cmd))
                 print()            
                 try:
-                    subprocess.check_output(cmd, shell=True)                 
+                    subprocess.check_output(cmd, shell=False)                 
                 except subprocess.CalledProcessError as e:
                     print()
                     print ("Erro:",e.output)
