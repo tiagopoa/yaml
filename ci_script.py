@@ -26,7 +26,13 @@ for i in range(0,x):
             print()
         else:
             cmd = (data.get('tasks')[j][passos[i]]['cmd'])
-            print("executando:",cmd)
+            print("Iniciando execução do comando",cmd,"aguarde...")
+            print()            
+            try:
+                output = subprocess.check_output(cmd, shell=False)                
+            except subprocess.CalledProcessError as e:
+                print()
+                print ("Erro:",e.output)
             print()
-            subprocess.call(cmd, shell=True)
+            print("Processo",cmd,"finalizado.")
             print()
