@@ -11,17 +11,24 @@ def yaml_loader(filepath):
     return data
 
 def pipeline_executor(data):
-    #Verifica quantos passos existem e armazena qual é a ordem de execução
+    #Verifica quantos passos existem e armazena qual é a ordem de execução em um array
     x=0
     passos={}
     for i in data['steps'][0]['execute']:
         passos[x]=data['steps'][0]['execute'][x]
         x+=1
 
+    #Verifica quantas tarefas existem e armazena em um array
+    x=0
+    tarefas={}
+    for i in data['tasks']:
+        tarefas[x]=data['tasks'][x]
+        x+=1
+
     #Procura as instruções e as executa na ordem correta.
-    for i in range(0,x):
-        for j in range(0,x):
-            if (str(data['tasks'][j]).find(passos[i])==-1):
+    for i in passos:
+        for j in tarefas:
+            if str(tarefas[j]).find(passos[i])==-1:
                 print()
             else:
                 arquivo = open("ci_script.%s.log" % (hoje), "a")
